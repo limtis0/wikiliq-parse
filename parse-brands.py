@@ -2,8 +2,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 
 if __name__ == '__main__':
-    # https://wikiliq.org/brands/beer/ preloaded and saved as a file
-    with open("HTML FILE") as html_file:
+    # https://wikiliq.org/brands/ENTER_CATEGORY/ preloaded and saved as a file
+    with open('ENTER_HTML_FILE_PATH', 'rb') as html_file:
         soup = BeautifulSoup(html_file, 'lxml')
 
     brands = soup.find_all('a', class_='brandcard')
@@ -15,6 +15,6 @@ if __name__ == '__main__':
         df['href'][ind] = brand['href']
 
     # df['product_count'] = pd.to_numeric(df['product_count'])
-    df.to_csv('csv/brands.csv')
+    df.to_csv('brands.csv')
 
     print(df.head(3))
