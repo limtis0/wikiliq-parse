@@ -7,6 +7,14 @@ def clean(dirty): return sub(r'[^a-zA-Z0-9 .,_°%-]', '', dirty)
 def clean_num(dirty): return sub(r'\D', '', dirty)
 
 
+def find_name(_soup):
+    return _soup.find('h1', class_='prod-title-top').find('span', class_='content').text
+
+
+def find_country(_soup):
+    return _soup.find('div', class_='country-name').find('span', class_='content').text
+
+
 def find_categories(_soup):
     properties = _soup.find_all('li', class_='property')
     for prop in properties:
@@ -38,6 +46,8 @@ def yield_data(_soup):
     :param _soup: Webpage of a product on wikiliq (BeautifulSoup)
     :return: Yields key and value of all the info it can get
     """
+    yield 'Name', find_name(_soup)
+    yield 'Country', find_country(_soup)
 
     for category, content in find_categories(_soup):
         yield category, content

@@ -3,7 +3,7 @@ import pandas as pd
 
 if __name__ == '__main__':
     # https://wikiliq.org/brands/beer/ preloaded and saved as a file
-    with open('C:\\Users\\79251\\Downloads\\wikiliq-beer.html') as html_file:
+    with open("HTML FILE") as html_file:
         soup = BeautifulSoup(html_file, 'lxml')
 
     brands = soup.find_all('a', class_='brandcard')
