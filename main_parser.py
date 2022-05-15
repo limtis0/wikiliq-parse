@@ -11,6 +11,10 @@ import parse_product
 
 from time import sleep
 
+
+# PRE-LOAD BRANDS DATA
+# WRITE CATEGORIES BY-HAND
+# AND YOU'RE GOOD TO GO
 categories = [
     'Name',
     'Country',
@@ -18,8 +22,11 @@ categories = [
     'Categories',
     'Tasting Notes',
     'ABV',
-    'Base Ingredient',
-    'Years Aged',
+    'Food Pairing',
+    'Suggested Glassware',
+    'Suggested Serving Temperature',
+    'Sweet-Dry Scale',
+    'Body',
     'Rating',
     'Rate Count',
     'Price',
@@ -48,14 +55,14 @@ try:
         try:
             button = driver.find_element(By.CLASS_NAME, 'view-all')
             button.click()
-            sleep(3)
+            sleep(2)
         except selenium.common.exceptions.NoSuchElementException:
             pass
 
         while len(products) != count:
             if len(products) != 0:
-                sleep(3)
-            brand_page = BeautifulSoup(driver.page_source, 'html.parser')
+                sleep(1)
+            brand_page = BeautifulSoup(driver.page_source, 'lxml')
             products = brand_page.findAll('a', class_='prod-card')
 
         for product in products:
@@ -71,7 +78,7 @@ try:
             item_count += 1
 except Exception as e:
     print(e)
-    df.to_csv('emergency_save.csv')
+    print('COULDN\'T FINISH')
     pass
 
 print(df.head(5))
